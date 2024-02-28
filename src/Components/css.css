@@ -8,12 +8,15 @@
     background: #3aaaff59; 
     align-self: flex-end;
     border-bottom-right-radius: 0; /* Adjust if necessary */
+    font-size: 1.2rem;
 }
   
 .incoming-message {
     background: #c6c6c6;
     align-self: flex-start;
     border-bottom-left-radius: 0;
+    font-size: 1.2rem;
+
 }
 
 .message-input input:focus {
@@ -35,9 +38,9 @@
 .chat-container {
     display: flex;
     flex-direction: column;
-    width: 70vw;
-    margin-left: 15vw;
-    margin-right: 15vw;
+    width: 60vw;
+    margin-left: 20vw;
+    margin-right: 20vw;
     height: 90vh;
    
 }
