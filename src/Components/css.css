@@ -102,6 +102,9 @@ margin-right: 10px; /* Adjusted margin */
 color: #606060; /* Darker shade on hover */
 }
 
-
+.link{
+    color: #7c7cfb;
+    text-decoration: underline;
+}
 
 

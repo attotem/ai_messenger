@@ -24,6 +24,7 @@ function MessageInput({ onSendMessage }) {
             <IconButton type="submit" className="send-button">
                 <SendIcon />
             </IconButton>
+
         </form>
     );
 };

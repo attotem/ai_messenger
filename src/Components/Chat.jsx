@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ChatMessage from './ChatMessage';
 import MessageInput from './MessageInput';
-import { ThreeDots } from 'react-loader-spinner'; // Make sure this line is added
+import { ThreeDots } from 'react-loader-spinner';
 import './css.css';
 
 function Chat() {
@@ -13,7 +13,7 @@ function Chat() {
 
     const handleSendMessage = (newMessage) => {
         setMessages(prevMessages => [...prevMessages, { text: newMessage, isUserMessage: true }]);
-        console.log(newMessage);
+        // console.log(newMessage);
         setIsLoading(true);
 
         fetch("https://webhoooks-dmitrykarpov.pythonanywhere.com/add_message", {
@@ -32,7 +32,12 @@ function Chat() {
             .then(data => {
                 console.log(data);
                 setIsLoading(false);
-                setMessages(prevMessages => [...prevMessages, { text: data.res, isUserMessage: false }]);
+                setMessages(prevMessages => [...prevMessages, {
+                    text: data.res,
+                    isUserMessage: false,
+                    documents: data.original_documents,
+                    links: data.links,
+                }]);
             })
             .catch(error => {
                 console.error("Error fetching data:", error);
@@ -70,7 +75,13 @@ function Chat() {
         <div className="chat-container">
             <div className="messages-container">
                 {messages.map((message, index) => (
-                    <ChatMessage key={index} message={message.text} isUserMessage={message.isUserMessage} />
+                    <ChatMessage
+                        key={index}
+                        message={message.text}
+                        isUserMessage={message.isUserMessage}
+                        links={message.links}
+                        documents={message.documents} 
+                    />
                 ))}
                 {isLoading &&
                     < ThreeDots
