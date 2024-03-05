@@ -108,3 +108,19 @@ color: #606060; /* Darker shade on hover */
 }
 
 
+.chat-message {
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+}
+
+.chat-message pre {
+    white-space: pre-wrap; 
+}
+.chat-message {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+    max-width: 60%;
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+}

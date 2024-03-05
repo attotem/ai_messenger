@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './css.css';
 
 function ChatMessage({ message, isUserMessage, documents = [], links = [] }) {
@@ -11,15 +11,19 @@ function ChatMessage({ message, isUserMessage, documents = [], links = [] }) {
                 <>
                     <div>Links</div>
                     {links.map((link, index) => (
-                        <div className='link' key={index}>{link}</div>
+                        <a href={link} className='link' key={index} target="_blank" rel="noopener noreferrer">
+                            {link}
+                        </a>
                     ))}
                 </>
             )}
             {!isUserMessage && documents.length > 0 && (
                 <>
-                    <div>Original documents</div> {/* Updated label */}
+                    <div>Original documents</div>
                     {documents.map((document, index) => (
-                        <div className='link' key={index}>{document}</div>
+                        <a href={document} className='link' key={index} target="_blank" rel="noopener noreferrer">
+                            {document}
+                        </a>
                     ))}
                 </>
             )}
