@@ -3,7 +3,7 @@ import ChatMessage from './ChatMessage';
 import MessageInput from './MessageInput';
 import { ThreeDots } from 'react-loader-spinner';
 import './css.css';
-
+import logo from "./logo.svg"
 function Chat() {
     const [messages, setMessages] = useState([]);
     const [thread_id, setThread_id] = useState();
@@ -73,6 +73,7 @@ function Chat() {
 
     return (
         <div className="chat-container">
+            <img src={logo} className='logo'></img>
             <div className="messages-container">
                 {messages.map((message, index) => (
                     <ChatMessage
@@ -80,7 +81,7 @@ function Chat() {
                         message={message.text}
                         isUserMessage={message.isUserMessage}
                         links={message.links}
-                        documents={message.documents} 
+                        documents={message.documents}
                     />
                 ))}
                 {isLoading &&
