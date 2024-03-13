@@ -18,7 +18,7 @@ function MessageInput({ onSendMessage }) {
                 type="text"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                placeholder="Type a message..."
+                placeholder="Pateikite savo klausimą"
                 className="input-field"
             />
             <IconButton type="submit" className="send-button">
