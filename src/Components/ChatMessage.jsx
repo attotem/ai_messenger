@@ -6,7 +6,7 @@ function ChatMessage({ message, isUserMessage, documents = [], links = [] }) {
 
     return (
         <div className={`chat-message ${messageClass}`}>
-            <div>{message}</div>
+            <pre>{message}</pre>
             {!isUserMessage && links.length > 0 && (
                 <>
                     <div className='bold'>Links</div>
