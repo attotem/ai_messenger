@@ -122,7 +122,7 @@ color: #606060; /* Darker shade on hover */
     white-space: pre-wrap; 
 }
 .chat-message {
-    padding: 20px;
+    padding: 5px 20px;
     margin: 5px;
     border-radius: 10px;
     max-width: 80%;

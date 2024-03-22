@@ -4,6 +4,8 @@ import MessageInput from './MessageInput';
 import { ThreeDots } from 'react-loader-spinner';
 import './css.css';
 import logo from "./logo.svg"
+import { createThread, addMessage } from '../config';
+
 function Chat() {
     const [messages, setMessages] = useState([]);
     const [thread_id, setThread_id] = useState();
@@ -11,24 +13,22 @@ function Chat() {
 
     const messagesEndRef = useRef(null);
 
+    useEffect(() => {
+        createThread()
+            .then(data => {
+                console.log(data);
+                setThread_id(data.thread_id)
+            })
+            .catch(error => {
+                console.error("Error creating thread:", error);
+            });
+    }, []);
+
     const handleSendMessage = (newMessage) => {
         setMessages(prevMessages => [...prevMessages, { text: newMessage, isUserMessage: true }]);
-        // console.log(newMessage);
         setIsLoading(true);
 
-        fetch("https://webhoooks-dmitrykarpov.pythonanywhere.com/add_message", {
-            method: "POST",
-            mode: "cors",
-            cache: "no-cache",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                message: newMessage,
-                thread_id: thread_id,
-            })
-        })
-            .then(response => response.json())
+        addMessage(newMessage, thread_id)
             .then(data => {
                 console.log(data);
                 setIsLoading(false);
@@ -40,33 +40,10 @@ function Chat() {
                 }]);
             })
             .catch(error => {
-                console.error("Error fetching data:", error);
+                console.error("Error adding message:", error);
                 setIsLoading(false);
             });
     };
-
-
-    useEffect(() => {
-        fetch("https://webhoooks-dmitrykarpov.pythonanywhere.com/create_thread", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-            }),
-            cache: "no-cache"
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                setThread_id(data.thread_id)
-            })
-            .catch(error => {
-                console.error("Error fetching data:", error);
-            });
-
-    }, []);
-
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [messages]);
